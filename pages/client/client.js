@@ -3,7 +3,7 @@ import { useWeb3 } from '@3rdweb/hooks'
 import ClientSideNavBarMobile from '../../components/client/clientLayout/clientSideNavBarMobile'
 import ClientSideNavBarPC from '../../components/client/clientLayout/clientSideNavBarPC'
 import JsAssets from '../../components/client/jsAssets'
-import Darkmodeswiter from '../../components/darkmodeswiter'
+
 import ClientDashboardd from './clientDashboardd'
 
 //Dependencies
@@ -29,7 +29,7 @@ const Client = ({ children,  twTokens, sanityTokens, walletAddress }) =>  {
           {children}
           </div>
           </div>
-         <Darkmodeswiter />
+       
          <JsAssets />
          
         </div>

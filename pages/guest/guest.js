@@ -10,7 +10,7 @@ import GuestTopBar from '../../components/guest/guestTopBar'
 //Dependencies
 import axios from 'axios'
 import { useState, useContext } from 'react'
-import Darkmodeswiter from '../../components/darkmodeswiter'
+
 
 
 const Guest = ({ children }) =>   {

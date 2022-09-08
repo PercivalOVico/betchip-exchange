@@ -17,11 +17,14 @@ function Redirect({to}) {
 
 const ClientHeader = ({twTokens, sanityTokens, walletAddress }) => {
 
-    
+     const { address, connectWallet } = useWeb3()
+    if (!address){
+        return <Redirect to='../../../../guest/guestLandingPage'/>
+     }
  //<GuestLandingPage />
   return (
     <Fragment>
-      
+       {walletAddress ? (
                <div class="top-bar">
                
                     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
@@ -229,7 +232,11 @@ const ClientHeader = ({twTokens, sanityTokens, walletAddress }) => {
                     </div>
                    
                 </div>
-        
+         ) : (
+       
+       <GuestLandingPage />
+
+        )}
     </Fragment>
   )
 }

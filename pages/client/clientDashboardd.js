@@ -11,6 +11,7 @@ import { useWeb3 } from '@3rdweb/hooks'
 import ClientHeader from '../../components/client/clientLayout/clientHeader'
 import ClientSendandRecieveCryptoModal from '../../components/client/clientWallet/clientSendandRecieveCryptoModal'
 import ClientBuyandSellCryptoModal from '../../components/client/clientWallet/clientBuyandSellCyrptoModal'
+import P2PTradingTable from '../../components/sharedComponents/P2PTradingTable'
 
 Modal.setAppElement('#__next')
 ClientSendandRecieveCryptoModal
@@ -248,6 +249,8 @@ const ClientDashboardd = ({walletAddress}) => {
                              twTokens={twTokens}
                             sanityTokens={sanityTokens}
                              walletAddress={address} />
+
+                               <P2PTradingTable />
                             
                         </div>
                     </div>

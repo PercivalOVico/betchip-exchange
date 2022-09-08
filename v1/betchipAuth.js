@@ -13,7 +13,7 @@ import { useState, useContext } from 'react'
 
 const BetchipAuth = ({ children }) =>   {
 
-  
+  const { address, connectWallet } = useWeb3()
    
   return (
     <Fragment>

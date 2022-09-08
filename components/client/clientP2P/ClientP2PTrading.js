@@ -1,51 +1,15 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { coins } from '../../../static/coins'
-import ClientCoin from './clientCoin'
+import ClientCoin from '../clientWallet/clientCoin'
 
-
-
-const ClientPortfolio = ({  twTokens, sanityTokens, walletAddress   })  => {
-
-      const [walletBalance, setWalletBalance] = useState(0)
-  const [sender] = useState(walletAddress)
-
-  const getBalance = async activeTwToken => {
-    const balance = await activeTwToken.balanceOf(sender)
-
-    return parseInt(balance.displayValue)
-  }
-
-  useEffect(() => {
-    const calculateTotalBalance = async () => {
-      setWalletBalance(0)
-
-      sanityTokens.map(async token => {
-        const currentTwToken = twTokens.filter(
-          twToken => twToken.address === token.contractAddress,
-        )
-
-        const balance = await getBalance(currentTwToken[0])
-        setWalletBalance(prevState => prevState + balance * token.usdPrice)
-      })
-    }
-
-    if (sanityTokens.length > 0 && twTokens.length > 0) {
-      calculateTotalBalance()
-    }
-  }, [twTokens, sanityTokens])
- // console.log(sanityTokens, 'uyguyguguygyg') 
-  //console.log(twTokens , 'percyt')
-  // console.log(walletAddress)
-  
- console.log(walletBalance)
+const ClientP2PTrading = () => {
   return (
-    <Fragment>
-    
+     
            <div class="col-span-12 mt-6">
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
-                                        Assets  {walletBalance.toLocaleString('US')}
+                                        Assets
                                     </h2>
                                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                                         <button class="btn box flex items-center text-slate-600 dark:text-slate-300"> <i data-lucide="file-text" class="hidden sm:block w-4 h-4 mr-2"></i> Export to Excel </button>
@@ -133,10 +97,7 @@ const ClientPortfolio = ({  twTokens, sanityTokens, walletAddress   })  => {
                                     </select>
                                 </div>
            </div>
-                         
-    </Fragment>
   )
 }
 
-export default ClientPortfolio
-
+export default ClientP2PTrading

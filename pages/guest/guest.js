@@ -15,7 +15,7 @@ import { useState, useContext } from 'react'
 
 const Guest = ({ children }) =>   {
 
-  const { address, connectWallet } = useWeb3()
+  
    
   return (
     <Fragment>

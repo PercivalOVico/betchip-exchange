@@ -22,3 +22,32 @@ npx thirdweb release
 PLEASE REMEMBER TO CORRECT THE NAV BARS ( MAKE THEM MORE DYAMNIC #COINBSE TUTORIAL- )
 side nav bar set & timeframe 1hr :25-26mins
 
+
+
+
+DEPLOY (set up vercel account... go to terminal of project and login into githunu vercel account )
+
+ yarn build
+ vercel
+npm i -g vercel
+yarn add vercel
+ vercel login
+  yarn add @vercel/node
+vercel --version
+===
+git remote add origin https://github.com/PercivalOVico/betchip-exchange.git
+git branch -M main
+git push -u origin main
+
+-- CREATED BRANCH 
+ git checkout -b deploy-with-git
+
+
+ git status
+git add .
+ git commit -m "0.01"
+git push --set-upstream origin deploy-with-git
+
+###RUN...
+cd /Users/mac/Documents/blockchain/betchip-exchange
+git push ... to update online

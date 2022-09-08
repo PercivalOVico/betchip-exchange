@@ -1,6 +1,12 @@
 // First, we must import the schema creator
-import createSchema from 'part:@sanity/base/schema-creator'
-import { coinSchema } from './coinSchema'
+import createSchema from 'part:@sanity/base/schema-creator';
+import { coinSchema } from './coinSchema';
+import {p2pAD} from './p2pAD';
+import {user} from './user';
+import {p2pTrade} from './p2pTrade';
+import {p2pCart} from './p2pCart';
+import {paymentResult} from './paymentResult';
+import {destinationAddress} from './destinationAddress';
 
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type'
@@ -9,5 +15,14 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 export default createSchema({
   // We name our schema
   name: 'default', // Then proceed to concatenate our document type  // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([coinSchema]), /* Your types here! */
+  types: schemaTypes.concat([
+    coinSchema,
+    p2pAD,
+    user,
+    p2pCart,
+    p2pTrade,
+    paymentResult,
+    destinationAddress,
+  
+  ]), /* Your types here! */
 })

@@ -1,51 +1,47 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { coins } from '../../../static/coins'
-import ClientCoin from './clientCoin'
+import { coins } from '../../static/coins'
+import ClientCoin from '../client/clientWallet/clientCoin'
+import client from '../../lib/client'
+import { p2pAD } from '../../studio/schemas/p2pAD'
+import TriangleLoader from '../common/loaders/triangleLoader'
+import Alert from '../common/alert'
+
+const P2PTradingTable = () => {
+
+   const [state, setState] = useState({
+    p2pADs: [],
+    error: '',
+    loading: true,
+  });
+  const { loading, error, p2pADs } = state;
+
+   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const p2pADs = await client.fetch(`*[_type == "p2pAD"]`);
+        setState({ p2pADs, loading: false });
+      } catch (err) {
+        setState({ loading: false, error: err.message });
+      }
+    };
+    fetchData();
+  }, []);
 
 
 
-const ClientPortfolio = ({  twTokens, sanityTokens, walletAddress   })  => {
-
-      const [walletBalance, setWalletBalance] = useState(0)
-  const [sender] = useState(walletAddress)
-
-  const getBalance = async activeTwToken => {
-    const balance = await activeTwToken.balanceOf(sender)
-
-    return parseInt(balance.displayValue)
-  }
-
-  useEffect(() => {
-    const calculateTotalBalance = async () => {
-      setWalletBalance(0)
-
-      sanityTokens.map(async token => {
-        const currentTwToken = twTokens.filter(
-          twToken => twToken.address === token.contractAddress,
-        )
-
-        const balance = await getBalance(currentTwToken[0])
-        setWalletBalance(prevState => prevState + balance * token.usdPrice)
-      })
-    }
-
-    if (sanityTokens.length > 0 && twTokens.length > 0) {
-      calculateTotalBalance()
-    }
-  }, [twTokens, sanityTokens])
- // console.log(sanityTokens, 'uyguyguguygyg') 
-  //console.log(twTokens , 'percyt')
-  // console.log(walletAddress)
-  
- console.log(walletBalance)
   return (
+           
     <Fragment>
-    
-           <div class="col-span-12 mt-6">
+          {loading ? (
+                     <TriangleLoader />
+                     ) : error ? (
+                    <Alert class="alert-primary">{error}</Alert>
+                    ) : (
+                 <div class="col-span-12 mt-6">
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
-                                        Assets  {walletBalance.toLocaleString('US')}
+                                       P2P TRADES
                                     </h2>
                                     <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                                         <button class="btn box flex items-center text-slate-600 dark:text-slate-300"> <i data-lucide="file-text" class="hidden sm:block w-4 h-4 mr-2"></i> Export to Excel </button>
@@ -64,37 +60,36 @@ const ClientPortfolio = ({  twTokens, sanityTokens, walletAddress   })  => {
                                                 <th class="text-center whitespace-nowrap">ACTIONS</th>
                                             </tr>
                                         </thead>
-                                          {coins.map(coin => (
-                            <tbody key={coin.name} >
+                                          {p2pADs.map(p2pAD => (
+                            <tbody key={p2pAD.slug} >
                                             <tr class="intro-x">
                                                 <td class="w-40">
                                                     <div class="flex">
                                                         <div class="w-10 h-10 image-fit zoom-in">
-                                                            <Image class="tooltip rounded-full" src={coin.logo} alt={coin.name} />
+                                                            <Image class="tooltip rounded-full" src={p2pAD.image} alt={p2pAD.name} />
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="" class="font-medium whitespace-nowrap">{coin.name}</a> 
-                                                    <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{coin.sign}</div>
+                                                    <a href="" class="font-medium whitespace-nowrap">{p2pAD.name}</a> 
+                                                    <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{p2pAD.numReviews}</div>
                                                 </td>
                                                 <td>
-                                                    <a href="" class="font-medium whitespace-nowrap"> {'$'} {coin.balanceUsd}</a> 
-                                                    <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{coin.balanceCoin} {coin.sign}</div>
+                                                    <a href="" class="font-medium whitespace-nowrap"> {'$'} {p2pAD.price}</a> 
+                                                    <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{p2pAD.title} {p2pAD.name}</div>
                                                 </td>
                                                 
                                                 
                                                 <td class="w-40"> 
-                                                     <div class="text-center"> {'$'}  {coin.priceUsd}</div>
-                                                    <div class="flex items-center justify-center text-success" style={{ color: coin.change < 0 ? '#f0616d' : '#26ad75' }} > <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {coin.change > 0 && '+'}
-                                                  {coin.change}%</div>
+                                                     <div class="text-center"> {'$'}  {p2pAD.price}</div>
+                                                    <div class="flex items-center justify-center text-success" style={{ color: p2pAD.change < 0 ? '#f0616d' : '#26ad75' }} > <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {p2pAD.change > 0 && '+'}
+                                                  {p2pAD.Category}%</div>
                                                 </td>
-                                                <td class="text-center"> {coin.allocation}{'%'} </td>
+                                                <td class="text-center"> {p2pAD.allocation}{'%'} </td>
                                                 <td class="table-report__action w-56">
                                                     <div class="flex justify-center items-center">
-                                                              <a class="flex items-center text-success" href=""> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> BUY </a>
-                                                        <a class="flex items-center text-danger" href=""> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> SELL</a>
-                                                        <a class="flex items-center text-warning" href=""> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> P2P </a>
+                                                        
+                                                        <button class="btn btn-pending w-32 mr-2 mb-2" onClick={() => { router.push('../auth/guestRegister');}}> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> TRADE </button> 
                                                     </div>
                                                 </td>
                                             </tr>
@@ -133,10 +128,10 @@ const ClientPortfolio = ({  twTokens, sanityTokens, walletAddress   })  => {
                                     </select>
                                 </div>
            </div>
-                         
-    </Fragment>
+   ) }
+         </Fragment>
   )
+  
 }
 
-export default ClientPortfolio
-
+export default P2PTradingTable

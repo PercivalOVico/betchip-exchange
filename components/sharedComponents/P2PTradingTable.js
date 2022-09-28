@@ -6,9 +6,14 @@ import client from '../../lib/client'
 import { p2pAD } from '../../studio/schemas/p2pAD'
 import TriangleLoader from '../common/loaders/triangleLoader'
 import Alert from '../common/alert'
+import P2PTradeModal from '../../pages/p2pAD/[slug]'
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import Link from 'next/link'
+import P2PTradingOrder from './P2PTradingOrder'
 
-const P2PTradingTable = () => {
-
+const P2PTradingTable = ({ p2pAD }) => {
+   const router = useRouter();
    const [state, setState] = useState({
     p2pADs: [],
     error: '',
@@ -28,7 +33,7 @@ const P2PTradingTable = () => {
     fetchData();
   }, []);
 
-
+ 
 
   return (
            
@@ -36,7 +41,7 @@ const P2PTradingTable = () => {
           {loading ? (
                      <TriangleLoader />
                      ) : error ? (
-                    <Alert class="alert-primary">{error}</Alert>
+                    <Alert error={error} />
                     ) : (
                  <div class="col-span-12 mt-6">
                                 <div class="intro-y block sm:flex items-center h-10">
@@ -61,40 +66,12 @@ const P2PTradingTable = () => {
                                             </tr>
                                         </thead>
                                           {p2pADs.map(p2pAD => (
-                            <tbody key={p2pAD.slug} >
-                                            <tr class="intro-x">
-                                                <td class="w-40">
-                                                    <div class="flex">
-                                                        <div class="w-10 h-10 image-fit zoom-in">
-                                                            <Image class="tooltip rounded-full" src={p2pAD.image} alt={p2pAD.name} />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <a href="" class="font-medium whitespace-nowrap">{p2pAD.name}</a> 
-                                                    <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{p2pAD.numReviews}</div>
-                                                </td>
-                                                <td>
-                                                    <a href="" class="font-medium whitespace-nowrap"> {'$'} {p2pAD.price}</a> 
-                                                    <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">{p2pAD.title} {p2pAD.name}</div>
-                                                </td>
-                                                
-                                                
-                                                <td class="w-40"> 
-                                                     <div class="text-center"> {'$'}  {p2pAD.price}</div>
-                                                    <div class="flex items-center justify-center text-success" style={{ color: p2pAD.change < 0 ? '#f0616d' : '#26ad75' }} > <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {p2pAD.change > 0 && '+'}
-                                                  {p2pAD.Category}%</div>
-                                                </td>
-                                                <td class="text-center"> {p2pAD.allocation}{'%'} </td>
-                                                <td class="table-report__action w-56">
-                                                    <div class="flex justify-center items-center">
-                                                        
-                                                        <button class="btn btn-pending w-32 mr-2 mb-2" onClick={() => { router.push('../auth/guestRegister');}}> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> TRADE </button> 
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                     <tbody key={p2pAD.slug} >
+            
+                                           <P2PTradingOrder p2pAD={p2pAD}/>
                                           
                                         </tbody>
+                                        
               ))}
                                     </table>
                                 </div>

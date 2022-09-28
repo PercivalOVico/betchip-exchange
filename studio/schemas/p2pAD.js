@@ -1,6 +1,6 @@
 export const p2pAD = {
   name: 'p2pAD',
-  title: 'p2pAD',
+  title: 'P2pAD',
   type: 'document',
   fields: [
     {

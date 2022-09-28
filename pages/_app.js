@@ -2,6 +2,8 @@ import '../styles/globals.css'
 import 'tailwindcss/tailwind.css';
 import { ThirdwebWeb3Provider } from '@3rdweb/hooks'
 import React, {Fragment, useState, useEffect } from 'react';
+import { StoreProvider } from '../lib/Store';
+import { SnackbarProvider } from 'notistack';
 
 
 const supportedChainIds = [4, 80001]
@@ -30,9 +32,11 @@ function MyApp({ Component, pageProps }) {
    <ThirdwebWeb3Provider
       supportedChainIds={supportedChainIds}
       connectors={connectors}>
-
-    <Component {...pageProps} />
-
+      <SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+      <StoreProvider>
+       <Component {...pageProps} />
+      </StoreProvider>
+      </SnackbarProvider>
     </ThirdwebWeb3Provider>
 
   )

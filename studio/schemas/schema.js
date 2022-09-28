@@ -7,6 +7,9 @@ import {p2pTrade} from './p2pTrade';
 import {p2pCart} from './p2pCart';
 import {paymentResult} from './paymentResult';
 import {destinationAddress} from './destinationAddress';
+import { announcement } from './announcement';
+import { announcementListing } from './announcementListing';
+import { admin } from './admin';
 
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type'
@@ -23,6 +26,10 @@ export default createSchema({
     p2pTrade,
     paymentResult,
     destinationAddress,
+    announcement,
+    announcementListing,
+    admin,
+    
   
   ]), /* Your types here! */
 })

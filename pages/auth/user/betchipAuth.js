@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import { useWeb3 } from '@3rdweb/hooks'
 import Image from 'next/image'
-import JsAssets from '../../components/client/jsAssets'
-import Header from '../../components/common/header'
+import JsAssets from '../../../components/client/jsAssets'
+import Header from '../../../components/common/header'
 
 
 //Dependencies

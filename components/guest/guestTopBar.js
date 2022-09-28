@@ -1,15 +1,23 @@
-import React, { Fragment,useContext, useEffect } from 'react'
+import React, { Fragment, useContext, useEffect, useState  } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import GuestTopNavBarMobile from './guestLayout/guestTopNavBarMobile'
 import GuestTopNavBarPC from './guestLayout/guestTopNavBarPC'
 import ClientDashboardd from '../../pages/client/clientDashboardd'
+import { Store } from '../../lib/Store'
+import jsCookie from 'js-cookie';
+import { useSnackbar } from 'notistack';
+import NextLink from 'next/link';
+import { getError } from '../../lib/error';
 
 const GuestTopBar = () => {
     
     const router = useRouter();
+     const { state, dispatch } = useContext(Store);
+     const {  board, userInfo } = state;
 
+ const { enqueueSnackbar } = useSnackbar();
  
 
   return (
@@ -28,8 +36,9 @@ const GuestTopBar = () => {
                 <GuestTopNavBarPC />
              
         </nav>
-            
-
+              {userInfo ? (
+                <>
+                    {userInfo.name}
                 <div class="intro-x dropdown mr-4 sm:mr-6">
                     <div class="dropdown-toggle notification notification--light notification--bullet cursor-pointer" role="button" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="bell" class="notification__icon dark:text-slate-500"></i> </div>
                     <div class="notification-content pt-2 dropdown-menu">
@@ -140,14 +149,18 @@ const GuestTopBar = () => {
                 </div>
 
             
-         
+             </>
         
-            
+            ) : (
                
         
-           <button class="btn btn-success w-32 mr-2 mb-2" onClick={() => { router.push('../auth/guestLogin');}}> <i data-lucide="download" class="w-4 h-4 mr-2"></i> SignIn </button>
+           <button class="btn btn-success w-32 mr-2 mb-2" onClick={() => { router.push('../auth/guestLogin');}}> <i data-lucide="download" class="w-4 h-4 mr-2"></i> SignIn </button> ,
+
            <button class="btn btn-pending w-32 mr-2 mb-2" onClick={() => { router.push('../auth/guestRegister');}}> <i data-lucide="download" class="w-4 h-4 mr-2"></i> Register </button> 
-         
+        
+             )};
+
+          
         
      
 

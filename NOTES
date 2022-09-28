@@ -22,7 +22,8 @@ npx thirdweb release
 PLEASE REMEMBER TO CORRECT THE NAV BARS ( MAKE THEM MORE DYAMNIC #COINBSE TUTORIAL- )
 side nav bar set & timeframe 1hr :25-26mins
 
-
+nom command to recuild the tailwindcss-elements  output 
+ npx tailwindcss -i ./src/input.css -o ./dist/output.css
 
 
 DEPLOY (set up vercel account... go to terminal of project and login into githunu vercel account )

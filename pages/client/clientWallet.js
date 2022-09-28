@@ -26,7 +26,7 @@ const ClientWallet= ({ twTokens, sanityTokens, walletAddress, connectWallet }) =
                     <div class="col-span-12 2xl:col-span-9">
                         <div class="grid grid-cols-12 gap-6">
                             
-                            <div class="col-span-12 xl:col-span-9 mt-8">
+                            <div class="col-span-12 2xl:col-span-9 mt-4">
                                 <div class="intro-y flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                         Wallet Overview
@@ -143,37 +143,6 @@ const ClientWallet= ({ twTokens, sanityTokens, walletAddress, connectWallet }) =
                                 </div>
                             </div>
                            
-                            <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3 row-start-4 lg:row-start-3 xl:row-start-auto mt-6 xl:mt-8">
-                                <div class="intro-y flex items-center h-10">
-                                    <h2 class="text-lg font-medium truncate mr-5">
-                                        Wallet Report
-                                    </h2>
-                                    <a href="" class="ml-auto text-primary truncate">Show More</a> 
-                                </div>
-                                <div class="report-box-2 before:hidden xl:before:block intro-y mt-5">
-                                    <div class="box p-5">
-                                        <div class="mt-3">
-                                            <div class="h-[196px]">
-                                                <canvas id="report-donut-chart"></canvas>
-                                            </div>
-                                        </div>
-                                        <div class="w-52 sm:w-auto mx-auto mt-8">
-                                            <div class="flex items-center">
-                                                <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                                <span class="truncate">Crypto</span> <span class="font-medium ml-auto">62%</span> 
-                                            </div>
-                                            <div class="flex items-center mt-4">
-                                                <div class="w-2 h-2 bg-pending rounded-full mr-3"></div>
-                                                <span class="truncate">NFT</span> <span class="font-medium ml-auto">33%</span> 
-                                            </div>
-                                            <div class="flex items-center mt-4">
-                                                <div class="w-2 h-2 bg-warning rounded-full mr-3"></div>
-                                                <span class="truncate">Fiat</span> <span class="font-medium ml-auto">10%</span> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         
 
                  
